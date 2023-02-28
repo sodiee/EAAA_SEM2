@@ -1,17 +1,19 @@
-package model_LinkedList;
+package model_Set;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class Studerende {
     private int studieNr;
     private String navn;
-    private List<Integer> karakterer;
+    private Set<Integer> karakterer;
 
     public Studerende(int studieNr, String navn) {
         this.studieNr = studieNr;
         this.navn = navn;
-        karakterer = new LinkedList<>();
+        karakterer = new HashSet<>();
     }
 
     public int getStudieNr() {
@@ -30,11 +32,16 @@ public class Studerende {
             karakterer.add(karakter);
     }
 
-    public List<Integer> getKaraterer() {
+    public Set<Integer> getKaraterer() {
         return karakterer;
     }
 
+    @Override
     public String toString() {
-        return "Studerende: " + navn + "Studienummer: " + studieNr;
+        return "Studerende{" +
+                "studieNr=" + studieNr +
+                ", navn='" + navn + '\'' +
+                ", karakterer=" + karakterer +
+                '}';
     }
 }

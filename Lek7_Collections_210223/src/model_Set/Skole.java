@@ -1,15 +1,17 @@
-package model_LinkedList;
+package model_Set;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class Skole {
     private String navn;
-    private List<Studerende> studerendes;
+    private Set<Studerende> studerendes;
 
     public Skole(String navn) {
         this.navn = navn;
-        studerendes = new LinkedList<>();
+        studerendes = new HashSet<>();
     }
 
     public String getNavn() {
@@ -30,10 +32,14 @@ public class Skole {
 
     public double gennemsnit() {
         double result = 0;
-        for (int i = 0; i < studerendes.size(); i++) {
-            result += studerendes.get(i).getKaraterer().get(i);
+        int count = 0;
+        for (Studerende s : studerendes) {
+            for (int k : s.getKaraterer()) {
+                result += k;
+                count++;
+            }
         }
-        return result;
+        return result / count;
     }
 
     public Studerende findStuderende(int studieNr) {
@@ -45,7 +51,11 @@ public class Skole {
         return null;
     }
 
+    @Override
     public String toString() {
-        return "Skole: " + navn;
+        return "Skole{" +
+                "navn='" + navn + '\'' +
+                ", studerendes=" + studerendes +
+                '}';
     }
 }
