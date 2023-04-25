@@ -26,7 +26,7 @@ public class SpiritusAdapter extends Vare {
 
     @Override
     public void setNavn(String navn) {
-        spiritus.getBetegnelse();
+        spiritus.setBetegnelse(navn);
     }
 
     @Override

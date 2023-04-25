@@ -24,12 +24,23 @@ public class ObservableBag implements Bag, Iterable<String>{
 
     @Override
     public void removeString(String s) {
-        strings.remove(s);
+        if (strings.containsKey(s)) {
+            strings.put(s, getCount(s) - 1);
+            if (getCount(s) == 0) {
+                strings.remove(s);
+            }
+        } if (strings.containsKey(s)){
+            notifyObservers(s, getCount(s));
+        }
     }
 
     @Override
     public int getCount(String s) {
-        return strings.get(s);
+        if (strings.containsKey(s)) {
+            return strings.get(s);
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -44,7 +55,7 @@ public class ObservableBag implements Bag, Iterable<String>{
 
     public void notifyObservers(String s, int antal) {
         for (Observer o : observers) {
-            o.update(s, getCount(s));
+            o.update(s, antal);
         }
     }
 

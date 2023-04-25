@@ -11,6 +11,13 @@ public class Main {
         observableBag.addString("Æble");
         observableBag.addString("Æble");
         observableBag.addString("Æble");
+        observableBag.removeString("Æble");
+        observableBag.removeString("Æble");
+        observableBag.removeString("Æble");
+        observableBag.removeString("Æble");
+        System.out.println();
         System.out.println(observableBag.getCount("Æble"));
+        System.out.println();
+        observableBag.forEach(s -> System.out.println("I posen er der: " + s));
     }
 }
