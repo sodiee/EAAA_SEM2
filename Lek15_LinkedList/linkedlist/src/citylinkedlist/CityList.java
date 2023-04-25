@@ -94,9 +94,19 @@ public class CityList {
 		}
 	}
 
+		public int numberInhabitants() {
+			int count = 0;
+			Node temp = first;
+			while (temp != null) {
+				count += temp.data.getInhabitants();
+				temp = temp.next;
+			}
+			return count;
+		}
+	}
+
 	class Node {
 		public City data;
 		public Node next;
 	}
 
-}
