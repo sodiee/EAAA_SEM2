@@ -1,16 +1,14 @@
 package opgave3sortedlinkelistdouble;
 
-import opgave2sortedlinkedlist.SortedLinkedList;
-
 public class SortedLinkedListDouble {
 
-	private Node first;
-	private Node last;
+	private Node head;
+	private Node tail;
 	private int size;
 
 	public SortedLinkedListDouble() {
-		first = null;
-		last = null;
+		head = null;
+		tail = null;
 		/*
 		first = new Node();
 		last = new Node();
@@ -29,21 +27,21 @@ public class SortedLinkedListDouble {
 		Node node = new Node();
 		node.data = e;
 
-		if (first == null) {
-			first = node;
-			last = node;
+		if (head == null) {
+			head = node;
+			tail = node;
 			return;
 		}
 
-		if (e.compareTo(first.data) < 0) {
-			node.next = first;
-			first.prev = node;
-			first = node;
+		if (e.compareTo(head.data) < 0) {
+			node.next = head;
+			head.prev = node;
+			head = node;
 			return;
 		}
 
-		Node curr = first.next;
-		Node prev = first;
+		Node curr = head.next;
+		Node prev = head;
 
 		while (curr != null && e.compareTo(curr.data) > 0) {
 			prev = curr;
@@ -57,7 +55,7 @@ public class SortedLinkedListDouble {
 		if (curr != null) {
 			curr.prev = node;
 		} else {
-			last = node;
+			tail = node;
 		}
 	}
 
@@ -70,11 +68,11 @@ public class SortedLinkedListDouble {
 	 * @return true hvis e blev fjernet fra listen ellers returneres false.
 	 */
 	public boolean removeElement(String e) {
-	Node prev = first;
+	Node prev = head;
 	Node curr = prev.next;
 
 	if (prev.data.equals(e)) {
-		first = curr;
+		head = curr;
 		curr.prev = null;
 		return true;
 	}
@@ -97,7 +95,7 @@ public class SortedLinkedListDouble {
 	 * Udskriver elementerne fra listen i sorteret rækkefølge 
 	 */
 	public void udskrivElements() {
-		Node current = first;
+		Node current = head;
 		while (current != null) {
 			System.out.println(current);
 			current = current.next;
@@ -108,7 +106,7 @@ public class SortedLinkedListDouble {
 	 * Udskriver elementerne fra listen i sorteret rækkefølge bagfra
 	 */
 	public void udskrivBagfra() {
-		Node current = last;
+		Node current = tail;
 		while (current.prev != null) {
 			System.out.println(current);
 			current = current.prev;
@@ -119,7 +117,7 @@ public class SortedLinkedListDouble {
 	 * Returnerer antallet af elementer i listen
 	 */
 	public int countElements() {
-		Node curr = first;
+		Node curr = head;
 		int count = 0;
 		while (curr != null) {
 			count++;
@@ -129,7 +127,7 @@ public class SortedLinkedListDouble {
 	}
 
 	public void printPointers() {
-		Node curr = first;
+		Node curr = head;
 
 		while (curr != null) {
 			System.out.print("Node: " + curr.data + ", ");

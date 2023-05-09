@@ -1,8 +1,5 @@
 package opgave2sortedlinkedlist;
 
-import java.util.Currency;
-import java.util.NoSuchElementException;
-
 public class SortedLinkedList {
     private Node first;
     private Node next;
@@ -48,6 +45,10 @@ public class SortedLinkedList {
         }
     }
 
+    /**
+     * Kvadratisk tidskompleksitet, fordi hver gang vi går gennem den ene liste, skal vi også gå gennem den anden.
+     * @param list
+     */
     public void addAll(SortedLinkedList list) {
         Node nodeToAdd = list.first;
 
