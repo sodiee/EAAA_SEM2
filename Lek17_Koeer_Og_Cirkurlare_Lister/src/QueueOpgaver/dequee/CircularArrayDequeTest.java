@@ -1,9 +1,7 @@
-package QueueOpgaver.deque;
+package QueueOpgaver.dequee;
 
 import QueueOpgaver.bryghus.Produkt;
 import QueueOpgaver.bryghus.Salg;
-import QueueOpgaver.queue.NodeQueue;
-import QueueOpgaver.queue.QueueI;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

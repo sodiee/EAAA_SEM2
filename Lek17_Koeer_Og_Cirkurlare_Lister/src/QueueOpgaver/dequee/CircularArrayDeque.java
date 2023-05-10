@@ -1,4 +1,4 @@
-package QueueOpgaver.deque;
+package QueueOpgaver.dequee;
 
 import java.util.NoSuchElementException;
 
