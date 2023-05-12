@@ -39,7 +39,7 @@ class QueueTest
         // ARRANGE
         // --------------------------------------------------
 
-        this.queue = new NodeQueue();
+        this.queue = new CircularArrayQueue(5);
 
         Produkt kloster = new Produkt("Klosterbryg");
         Produkt sweet = new Produkt("Sweet Georgia Brown");

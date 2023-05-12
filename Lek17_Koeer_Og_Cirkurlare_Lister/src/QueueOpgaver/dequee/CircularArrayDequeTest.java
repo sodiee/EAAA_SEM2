@@ -9,120 +9,89 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CircularArrayDequeTest {
 
-    private DequeI queue;
+    private DequeI queue = new CircularArrayDeque(5);
 
-    private Salg salg1;
-    private Salg salg2;
-    private Salg salg3;
-    private Salg salg4;
-    private Salg salg5;
-    private Salg salg6;
-
-    @BeforeEach
-    void setUp() throws Exception {
-        // --------------------------------------------------
-        // ARRANGE
-        // --------------------------------------------------
-
-        this.queue = new CircularArrayDeque();
-
-        Produkt kloster = new Produkt("Klosterbryg");
-        Produkt sweet = new Produkt("Sweet Georgia Brown");
-        Produkt extra = new Produkt("Extra Pilsner");
-        Produkt classic = new Produkt("Classic Jazz");
-        Produkt klippekort10 = new Produkt("Klippekort 10 klip");
-        Produkt klippekort6 = new Produkt("Klippekort 6 klip");
-
-        this.salg1 = new Salg(1);
-        this.salg1.createSalgsLinje(kloster, 2, 40);
-
-        this.salg2 = new Salg(2);
-        this.salg2.createSalgsLinje(sweet, 3, 60);
-
-        this.salg3 = new Salg(3);
-        this.salg3.createSalgsLinje(extra, 2, 40);
-
-        this.salg4 = new Salg(4);
-        this.salg4.createSalgsLinje(classic, 3, 60);
-
-        this.salg5 = new Salg(5);
-        this.salg5.createSalgsLinje(klippekort10, 1, 160);
-
-        this.salg6 = new Salg(6);
-        this.salg6.createSalgsLinje(klippekort6, 2, 200);
-    }
+    private int i = 1;
+    private int j = 2;
+    private int k = 3;
+    private int h = 4;
+    private int f = 5;
+    private int d = 6;
 
     @Test
     void addFirst() {
         //Act      //Arrange
-        queue.addFirst(salg1);
+        queue.addFirst(i);
 
         //Assert
-        assertEquals(this.salg1, queue.getFirst());
+        assertTrue(queue.getFirst().equals(i));
     }
 
     @Test
     void addLast() {
         //Act & Arrange
-        queue.addLast(salg6);
+        queue.addLast(i);
+        queue.addLast(d);
 
         //Assert
-        assertEquals(this.salg6, queue.getLast());
+        assertEquals(2, queue.getLast());
     }
 
     @Test
     void removeFirst() {
         //Act && arrange
-        queue.addFirst(salg1);
-        queue.addFirst(salg2);
-        queue.removeFirst();
-
+        queue.addFirst(i);
+        queue.addFirst(j);
 
         //Assert
-        assertEquals(salg1, queue.getFirst());
+        assertFalse(queue.isEmpty());
+        assertEquals(j, queue.getFirst());
     }
 
     @Test
     void removeLast() {
         //Act && arrange
-        queue.addFirst(salg1);
-        queue.addFirst(salg2);
+        queue.addFirst(i);
+        queue.addFirst(j);
         queue.removeLast();
 
 
         //Assert
-        assertEquals(salg2, queue.getFirst());
+        assertEquals(j, queue.getFirst());
     }
 
     @Test
     void getFirst() {
         //act arrance
-        queue.addFirst(salg1);
+        queue.addFirst(i);
 
         //assert
-        assertEquals(salg1, queue.getFirst());
+        assertEquals(i, queue.getFirst());
     }
 
     @Test
     void getLast() {
-        queue.addFirst(salg1);
-        queue.addFirst(salg2);
+        queue.addFirst(i);
+        queue.addFirst(j);
 
-        assertEquals(salg1, queue.getLast());
+        assertEquals(i, queue.getLast());
     }
 
     @Test
     void size() {
         assertEquals(0, queue.size());
 
-        queue.addFirst(salg1);
+        queue.addFirst(i);
         assertEquals(1, queue.size());
+
+        queue.addFirst(j);
+        assertEquals(2, queue.size());
     }
 
     @Test
     void isEmpty() {
         assertTrue(queue.isEmpty());
-        queue.addFirst(salg1);
+        queue.addFirst(i);
         assertFalse(queue.isEmpty());
 
     }

@@ -4,131 +4,75 @@ import java.util.NoSuchElementException;
 
 public class CircularArrayDeque implements DequeI {
 
+
     Object[] arr;
-    private Node first;
-    private Node last;
+    private int first;
+    private int last;
     private int currentSize;
 
-    public CircularArrayDeque() {
-        arr = new Object[5];
-        first = null;
-        last = null;
+    public CircularArrayDeque(int size) {
+        arr = new Object[size];
+        first = 0;
+        last = 0;
         currentSize = 0;
     }
 
     @Override
     public void addFirst(Object element) {
-        Node newNode = new Node();
-        newNode.data = element;
-
-        if (first == null) {
-            first = newNode;
-            last = newNode;
-            currentSize++;
+        growIfNecessary();
+        currentSize++;
+        if (first == 0) {
+            arr[first] = element;
+            arr[last] = element;
+            first = (first + 1) % arr.length;
+            last = (last + 1) % arr.length;
         } else {
-            Node prev = first;
-            Node curr = prev.next;
 
-            if (curr == null) {
-                //rykker den første node
-                curr = first;
-                //sætter den nye node til at være first
-                first = newNode;
-                //sætter den node first til at være first.next
-                first.next = curr;
-                //sætter den gamle first til at være last.
-                last = curr;
-                currentSize++;
-            } else {
-                //sætter curr til at være den gamle first
-                curr = first;
-                //sætter den nye first til at være first
-                first = newNode;
-                //sætter first.next til at være den gamle first
-                first.next = curr;
-                currentSize++;
-            }
+            arr[first + 1] = arr[first];
+            arr[last] = arr[first - 1];
+            arr[first] = element;
+            first = (first + 1) % arr.length;
         }
     }
 
     @Override
     public void addLast(Object element) {
-        Node newNode = new Node();
-        newNode.data = element;
-
-        if (first == null) {
-            first = newNode;
-            last = newNode;
-            last.next = first;
-            currentSize++;
-        } else {
-            Node prev = first;
-            Node curr = prev.next;
-            boolean found = false;
-
-            while (!found) {
-                if (curr == null) {
-                    curr = newNode;
-                    last.next = first;
-                    last = curr;
-
-
-                    found = true;
-                } else {
-                    prev = curr;
-                    curr = prev.next;
-                }
-            }
-        }
+        growIfNecessary();
+        currentSize++;
+        arr[last] = element;
+        last = (last + 1) % arr.length;
     }
 
     @Override
     public Object removeFirst() {
-        Object deleted = null;
-
-        if (first != null) {
-            deleted = first;
-            first = first.next;
-            last.next = first;
-        } else {
+        if (currentSize == 0) {
             throw new NoSuchElementException();
         }
+        Object deleted = arr[first];
+        first = (first + 1) % arr.length;
+        currentSize--;
         return deleted;
     }
 
     @Override
     public Object removeLast() {
-        Object deleted = null;
-        Node prev = first;
-        Node curr = prev.next;
-        boolean found = false;
-
-        while (!found) {
-            if (curr.next == null) {
-                //opdaterer deleted variable med sidste;
-                deleted = last;
-                //sætter last til at være næstsidste
-                last = prev;
-                //opdatere sidste med null, så den sidste node bliver glemt
-                last.next = first;
-
-                found = true;
-            } else {
-                prev = curr;
-                curr = prev.next;
-            }
+        if (currentSize == 0) {
+            throw new NoSuchElementException();
         }
+        Object deleted = arr[last];
+        last = (last + 1) % arr.length;
+        currentSize--;
         return deleted;
     }
 
     @Override
     public Object getFirst() {
-        return first.data;
+        return first;
     }
 
     @Override
     public Object getLast() {
-        return last.data;
+        return last;
     }
 
     @Override
@@ -138,11 +82,32 @@ public class CircularArrayDeque implements DequeI {
 
     @Override
     public boolean isEmpty() {
-        return first == null;
+        return currentSize == 0;
     }
 
-    class Node {
-        private Object data;
-        private Node next;
+    public void udskrivElements() {
+        int current = 0;
+        while (current != currentSize) {
+            System.out.println(arr[current]);
+            current++;
         }
+    }
+
+    /**
+     * Grows the element array if the current size equals the capacity.
+     */
+    private void growIfNecessary()
+    {
+        if (currentSize == arr.length)
+        {
+            Object[] newElements = new Object[2 * arr.length];
+            for (int i = 0; i < arr.length; i++)
+            {
+                newElements[i] = arr[(first + i) % arr.length];
+            }
+            arr = newElements;
+            first = 0;
+            last = currentSize;
+        }
+    }
 }

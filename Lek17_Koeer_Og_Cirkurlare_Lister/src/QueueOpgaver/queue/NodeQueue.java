@@ -1,5 +1,6 @@
 package QueueOpgaver.queue;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 /**
@@ -8,20 +9,19 @@ import java.util.NoSuchElementException;
 public class NodeQueue implements QueueI {
     private Node first;
     private Node last;
-    private Object[] arr;
     private int size;
 
     /**
      * Constructs an empty queue.
      */
     public NodeQueue() {
-        arr = new Object[5];
         first = null;
         last = null;
         size = 0;
         // TODO: Assignment 1: Implement this constructor...
     }
 
+    //kan gøres meget mere enkel
     @Override
     public void enqueue(Object element) {
         if (first == null) {
@@ -55,6 +55,7 @@ public class NodeQueue implements QueueI {
         // TODO: Assignment 1: Implement this method...
     }
 
+    //kan gøres meget mere enkel
     @Override
     public Object dequeue() {
         Node deleted;
