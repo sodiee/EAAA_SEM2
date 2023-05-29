@@ -2,22 +2,29 @@ package binarysearchtreestuderende;
 
 public class App {
     public static void main(String[] args) {
-        BinarySearchTree<Integer> binarySearchTree = new BinarySearchTree<>();
-        binarySearchTree.add(45);
-        binarySearchTree.add(22);
-        binarySearchTree.add(11);
-        binarySearchTree.add(30);
-        binarySearchTree.add(15);
-        binarySearchTree.add(25);
-        binarySearchTree.add(77);
-        binarySearchTree.add(90);
-        binarySearchTree.add(88);
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        bst.add(45);
+        bst.add(22);
+        bst.add(11);
+        bst.add(15);
+        bst.add(30);
+        bst.add(25);
+        bst.add(77);
+        bst.add(90);
+        bst.add(88);
+        bst.print();
 
-        binarySearchTree.print();
-        System.out.println("max: " + binarySearchTree.findMax());
-        System.out.println("min: " + binarySearchTree.findMin());
-        System.out.println("removed min: "  + binarySearchTree.removeMin());
-        System.out.println("removed max: " + binarySearchTree.removeMax());
-        binarySearchTree.print();
+        System.out.println(bst.findMax());
+        System.out.println(bst.findMin());
+        System.out.println();
+
+        for (int i = 0; i < 9; i++) {
+            bst.print();
+            System.out.println(bst.removeMin());
+        }
+        System.out.println("til slut: ");
+        bst.print();
+
+
     }
 }
