@@ -4,6 +4,7 @@ public class DictionaryBST<K extends Comparable<K>, V> implements
 Dictionary<K, V> {
 
 	private Node root;
+	private int size;
 
 	public DictionaryBST() {
 		root = null;
@@ -11,9 +12,7 @@ Dictionary<K, V> {
 
 	@Override
 	public V get(K key) {
-		// TODO
-		return null;
-
+		return find(key).value;
 	}
 
 	private Node find(K key) {
@@ -39,15 +38,46 @@ Dictionary<K, V> {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO
-		return false;
+		return root == null;
 	}
 
 	@Override
 	public V put(K key, V value) {
-		// TODO
-		return null;
+		Node current = root;
+		Node newNode = new Node(key, value);
+		boolean found = false;
 
+		if (root == null) {
+			root = newNode;
+			size++;
+			return value;
+		}
+		if (find(key) == value) {
+			find(key).value = value;
+			return value;
+		}
+
+		while (!found) {
+			int d = current.key.compareTo(key);
+			if (d > 0) {
+				if (current.left == null) {
+					current.addNode(newNode);
+					size++;
+					found = true;
+				} else {
+					current = current.left;
+				}
+			} else {
+				if (current.right == null) {
+					current.addNode(newNode);
+					size++;
+					found = true;
+				} else {
+					current = current.right;
+				}
+			}
+		}
+		return newNode.value;
 	}
 
 	@Override
@@ -61,6 +91,7 @@ Dictionary<K, V> {
 			if (d == 0) {
 				found = true;
 				toReturn = toBeRemoved.value;
+				size--;
 			} else {
 				parent = toBeRemoved;
 				if (d > 0) {
@@ -125,8 +156,20 @@ Dictionary<K, V> {
 
 	@Override
 	public int size() {
-		// TODO
-		return -1;
+		return size;
+	}
+
+	public void print() {
+		print(root);
+		System.out.println();
+	}
+
+	private void print(Node parent) {
+		if (parent != null) {
+			print(parent.left);
+			System.out.print(parent.value + " ");
+			print(parent.right);
+		}
 	}
 
 	private class Node {
@@ -149,7 +192,20 @@ Dictionary<K, V> {
 		 *            the node to insert
 		 */
 		private void addNode(Node newNode) {
-			// TODO
+			int comp = newNode.key.compareTo(key);
+			if (comp < 0) {
+				if (left == null) {
+					left = newNode;
+				} else {
+					left.addNode(newNode);
+				}
+			} else if (comp > 0) {
+				if (right == null) {
+					right = newNode;
+				} else {
+					right.addNode(newNode);
+				}
+			}
 		}
 
 	}
